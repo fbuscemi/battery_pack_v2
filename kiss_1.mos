@@ -1,0 +1,3 @@
+loadModel(Modelica);
+loadFile("AirEnergy_Kuehlung_circle2.mo");
+simulate(AirEnergy_Kuehlung_circle2, stopTime=2000.0, fileNamePrefix="kiss_1");
