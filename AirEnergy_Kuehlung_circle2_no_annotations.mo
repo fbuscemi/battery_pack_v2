@@ -1,13 +1,6 @@
 model AirEnergy_Kuehlung_circle2
   replaceable package Medium = Modelica.Media.Water.StandardWaterOnePhase constrainedby Modelica.Media.Interfaces.PartialMedium;
   
-  block PouchWaermemenge
-    Modelica.Blocks.Interfaces.RealInput I;
-    Modelica.Blocks.Interfaces.RealInput R;
-    Modelica.Blocks.Interfaces.RealOutput Q;
-  equation
-    Q = (I ^ 2 * R)/4;
-  end PouchWaermemenge;
 
   block Wand
     import SI = Modelica.SIunits;
@@ -54,6 +47,15 @@ model AirEnergy_Kuehlung_circle2
   
   inner Modelica.Fluid.System system;
   Modelica.Fluid.Sources.MassFlowSource_T boundary(redeclare package Medium = Medium, T = 293.15, m_flow = 0.0037, nPorts = 1);
+
+  block PouchWaermemenge
+    Modelica.Blocks.Interfaces.RealInput I;
+    Modelica.Blocks.Interfaces.RealInput R;
+    Modelica.Blocks.Interfaces.RealOutput Q;
+  equation
+    Q = (I ^ 2 * R)/4;
+  end PouchWaermemenge;
+
 
   block PouchZelle
     Modelica.Blocks.Sources.Step Ladevorgang(height = -1, offset = 1, startTime = 600);

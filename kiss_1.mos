@@ -1,3 +1,9 @@
+mkdir("_temp");
+copy("AirEnergy_Kuehlung_circle2.mo", "_temp/AirEnergy_Kuehlung_circle2.mo");
+cd("_temp");
 loadModel(Modelica);
 loadFile("AirEnergy_Kuehlung_circle2.mo");
 simulate(AirEnergy_Kuehlung_circle2, stopTime=2000.0, fileNamePrefix="kiss_1");
+copy("kiss_1_res.mat", "../kiss_1_res.mat");
+cd("..");
+remove("_temp");
