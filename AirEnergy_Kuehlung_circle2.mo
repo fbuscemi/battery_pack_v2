@@ -74,7 +74,7 @@ model AirEnergy_Kuehlung_circle2
     Placement(visible = true, transformation(origin = {-282, -36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 
   Modelica.Fluid.Sources.MassFlowSource_T boundary(redeclare package Medium = Medium, T = 293.15, m_flow = 0.0037, nPorts = 1) annotation(
-    Placement(visible = true, transformation(origin = {-254, -84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {-266, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 
   block PouchZelle
     Modelica.Blocks.Sources.Step Ladevorgang(height = -1, offset = 1, startTime = 600) annotation(
@@ -295,7 +295,7 @@ model AirEnergy_Kuehlung_circle2
   Modelica.Fluid.Sensors.TemperatureTwoPort KuehlmediumTempIn (replaceable package Medium = Medium) annotation(
     Placement(visible = true, transformation(origin = {-212, -68}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Fluid.Sources.FixedBoundary boundary1(replaceable package Medium = Medium, T = 293.15, nPorts = 1) annotation(
-    Placement(visible = true, transformation(origin = {-242, -120}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {-268, -138}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 
 
 equation
@@ -310,11 +310,11 @@ equation
   connect(pouchCellAndPipe.port_a, KuehlmediumTempOut.port_b) annotation(
     Line(points = {{-187, -106}, {-187, -118.5}, {-196, -118.5}, {-196, -138}}, color = {0, 127, 255}));
   connect(boundary.ports[1], KuehlmediumTempIn.port_a) annotation(
-    Line(points = {{-244, -84}, {-222, -84}, {-222, -68}}, color = {0, 127, 255}));
+    Line(points = {{-256, -80}, {-236, -80}, {-236, -68}, {-222, -68}}, color = {0, 127, 255}));
   connect(KuehlmediumTempIn.port_b, pouchCellAndPipe.fluidPort_a) annotation(
     Line(points = {{-202, -68}, {-188, -68}, {-188, -88}}, color = {0, 127, 255}));
   connect(KuehlmediumTempOut.port_a, boundary1.ports[1]) annotation(
-    Line(points = {{-216, -138}, {-232, -138}, {-232, -120}}, color = {0, 127, 255}));
+    Line(points = {{-216, -138}, {-258, -138}}, color = {0, 127, 255}));
   connect(pouchCellAndPipe2.fluidPort_b, pouchCellAndPipe3.fluidPort_a) annotation(
     Line(points = {{-12, -86}, {20, -86}, {20, -84}, {20, -84}}, color = {0, 127, 255}));
   connect(pouchCellAndPipe3.fluidPort_b, pouchCellAndPipe4.fluidPort_a) annotation(
