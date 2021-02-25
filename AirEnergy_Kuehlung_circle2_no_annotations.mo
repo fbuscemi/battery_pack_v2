@@ -1,3 +1,15 @@
+/*
+
+Dieses Modell beschreibt nur ein Rack/scheibe mit 2x8 Zellen aus Kiss!
+das battery pack hat 9 racks.
+
+Was fehlt:
+- Druckverluste Krümmer
+- das modell beschreibt gut die wärme
+
+*/
+
+
 model AirEnergy_Kuehlung_circle2
   replaceable package Medium = Modelica.Media.Water.StandardWaterOnePhase constrainedby Modelica.Media.Interfaces.PartialMedium;
   
@@ -46,16 +58,37 @@ model AirEnergy_Kuehlung_circle2
   end Wand;
   
   inner Modelica.Fluid.System system;
-  Modelica.Fluid.Sources.MassFlowSource_T boundary(redeclare package Medium = Medium, T = 293.15, m_flow = 0.0037, nPorts = 1);
+
+/* 
+Wasser Volumenstrom Battery pack gesamt: 120 l/h. Pro rack -> 120/9 = 13.3 l/h = 0.0037 l/s 
+m_flow = 0.0037 kg/s in einem rack -> passt
+*/
+
+  Modelica.Fluid.Sources.MassFlowSource_T boundary(redeclare package Medium = Medium, 
+                                                    T = 293.15, 
+                                                    m_flow = 0.0037, 
+                                                    nPorts = 1);
 
   block PouchWaermemenge
     Modelica.Blocks.Interfaces.RealInput I;
     Modelica.Blocks.Interfaces.RealInput R;
     Modelica.Blocks.Interfaces.RealOutput Q;
   equation
+    
+    // Faktor 1/4: weil dies nur ein 4 der Batterie darstellt!
+    // Q ... Wärmeleistung einer viertel Batteriezelle (P = UI, U = R_i * I, R_i ... innenwiderstand)
     Q = (I ^ 2 * R)/4;
   end PouchWaermemenge;
 
+/*
+TODO: therm. kontaktwiderstand (batt - alu) verifizieren 
+
+Wärmekapazität der 1/4-zelle 36.3 J/K
+C = c m
+c = 1200 J/kg K (https://www.sciencedirect.com/science/article/abs/pii/S0378775318305688)
+m = 0.132 kg / 4
+C = 0.132 * (1/4) * 1200 = 39.6 J/K => passt.
+*/
 
   block PouchZelle
     Modelica.Blocks.Sources.Step Ladevorgang(height = -1, offset = 1, startTime = 600);
@@ -87,9 +120,28 @@ model AirEnergy_Kuehlung_circle2
     connect(heatFlowSensor_nachHeatCapacitor.port_b, ZelleAufAlu.solid);
   end PouchZelle;
 
+
+/*
+
+Beinhaltet zwei Viertel-Zellen: vorder- und hinterseite
+
+Wand aus alu - Wand zwischen pipe und batteriezelle
+t = 2 mm entspricht CAD
+area_h = 344 mm² = 8 x 43 mm (breite kühlkanal x breite batterie)
+k_wall, c_wall, rho_wall entpricht Alu
+*/
+
   model CooledPouchCell
     AirEnergy_Kuehlung_circle2.PouchZelle pouchZelle1;
-    AirEnergy_Kuehlung_circle2.Wand wand( T(displayUnit = "degC", fixed = false),T_start (displayUnit = "K") = 293.15, Ta(fixed = false), Tb(fixed = false),area_h = 3.44e-4, c_wall = 888, dT(displayUnit = "K") = 0, k_wall = 220, n = 1, rho_wall = 2700, s = 0.002);
+    AirEnergy_Kuehlung_circle2.Wand wand( T(displayUnit = "degC", fixed = false),
+                                          T_start (displayUnit = "K") = 293.15, 
+                                          Ta(fixed = false), Tb(fixed = false),
+                                          area_h = 3.44e-4, 
+                                          c_wall = 888, 
+                                          dT(displayUnit = "K") = 0, 
+                                          k_wall = 220, n = 1, 
+                                          rho_wall = 2700, 
+                                          s = 0.002);
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Qpipe;
     inner Modelica.Fluid.System system;
     AirEnergy_Kuehlung_circle2.PouchZelle pouchZelle;
@@ -103,6 +155,8 @@ model AirEnergy_Kuehlung_circle2
     connect(wand.heatPort_b[1], thermalCollector.port_a[2]);
   end CooledPouchCell;
 
+// kann weg
+/*
   block TwoPouchCells
     AirEnergy_Kuehlung_circle2.CooledPouchCell cooledPouchCell;
     AirEnergy_Kuehlung_circle2.CooledPouchCell cooledPouchCell1;
@@ -120,7 +174,18 @@ model AirEnergy_Kuehlung_circle2
     connect(thermalCollector.port_b, heatFlowSensor_hinterTC.port_b);
     connect(heatFlowSensor_hinterTC.port_a, Qtwocells);
   end TwoPouchCells;
+  */
 
+  /*
+  Länge entspricht der Breite einer Batterie (); 
+  Querschnitt entspricht dem Kanalquerschnitt in der gefrästen platte.
+  wand1 entspricht dem massiven alu zwischen den schleifen des kühlkanals, wärmeleitung in y-richtung. 
+  Dicke im modell 40 mm, im cad 32 mm (40 mm ist von mitte kanal zu mitte kanal)
+  heat transfer area: 172 mm² = 4 x 43 (nuttiefe x batteriebreite)
+  rho_wall 2700 passt zu alu
+  c_wall: spez. wärmekapazität 888 J/kgK -> passt, laut google, perfekt zu Alu
+  k_wall = 220 W/mK -> passt zu Alu
+  */
   block PouchCellAndPipe
     Modelica.Fluid.Pipes.DynamicPipe pipe1(replaceable package Medium = Medium, T_start = 293.15, crossArea = 0.32e-4, diameter = 0.0, isCircular = false, length = 0.043, nNodes = 3, nParallel = 1, perimeter = 0.024, roughness = 0, use_HeatTransfer = true);
     Modelica.Fluid.Interfaces.FluidPort_a port_a (replaceable package Medium = Medium);

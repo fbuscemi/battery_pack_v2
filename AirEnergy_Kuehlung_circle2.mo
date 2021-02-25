@@ -136,7 +136,7 @@ model AirEnergy_Kuehlung_circle2
 
   model CooledPouchCell
     AirEnergy_Kuehlung_circle2.PouchZelle pouchZelle1 annotation(
-      Placement(visible = true, transformation(origin = {-72, 12}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Placement(visible = true, transformation(origin = {-71, 13}, extent = {{-11, -11}, {11, 11}}, rotation = -90)));
     AirEnergy_Kuehlung_circle2.Wand wand( T(displayUnit = "degC", fixed = false),T_start (displayUnit = "K") = 293.15, Ta(fixed = false), Tb(fixed = false),area_h = 3.44e-4, c_wall = 888, dT(displayUnit = "K") = 0, k_wall = 220, n = 1, rho_wall = 2700, s = 0.002) annotation(
       Placement(visible = true, transformation(origin = {-70, -26}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Qpipe annotation(
@@ -151,7 +151,7 @@ model AirEnergy_Kuehlung_circle2
       Placement(visible = true, transformation(origin = {-16, -48}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
   connect(pouchZelle1.Q, wand.heatPort_a[1]) annotation(
-      Line(points = {{-70, -8}, {-70, -21}}, color = {191, 0, 0}));
+      Line(points = {{-69, -9}, {-69, -14.5}, {-70, -14.5}, {-70, -21}}, color = {191, 0, 0}));
   connect(pouchZelle.Q, wand1.heatPort_a[1]) annotation(
       Line(points = {{38, 0}, {38, -19}}, color = {191, 0, 0}));
   connect(thermalCollector.port_b, Qpipe) annotation(
@@ -209,20 +209,20 @@ model AirEnergy_Kuehlung_circle2
       Placement(visible = true, transformation(origin = {-28, 64}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   inner Modelica.Fluid.System system annotation(
       Placement(visible = true, transformation(origin = {-124, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  AirEnergy_Kuehlung_circle2.Wand wand1(T_start(displayUnit = "K") = 293.15, area_h = 1.72e-4, c_wall = 888, dT(displayUnit = "K") = 0, k_wall = 220, rho_wall = 2700, s = 0.04)  annotation(
-      Placement(visible = true, transformation(origin = {-28, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  AirEnergy_Kuehlung_circle2.Wand wand1(T_start(displayUnit = "K") = 293.15, area_h = 1.72e-4, c_wall = 888, dT(displayUnit = "K") = 0, k_wall = 220, rho_wall (displayUnit = "kg/m3") = 2700, s = 0.04)  annotation(
+      Placement(visible = true, transformation(origin = {-50, 42}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   AirEnergy_Kuehlung_circle2.CooledPouchCell cooledPouchCell annotation(
-      Placement(visible = true, transformation(origin = {-26, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {18, 86}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   AirEnergy_Kuehlung_circle2.CooledPouchCell cooledPouchCell1 annotation(
-      Placement(visible = true, transformation(origin = {-28, -86}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+      Placement(visible = true, transformation(origin = {28, -52}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
   Modelica.Fluid.Pipes.DynamicPipe dynamicPipe1(replaceable package Medium = Medium, T_start = 293.15, crossArea = 0.32e-4, diameter = 0.0, isCircular = false, length = 0.043, nNodes = 3, nParallel = 1, perimeter = 0.024, roughness = 0, use_HeatTransfer = true) annotation(
       Placement(visible = true, transformation(origin = {-28, 22}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   AirEnergy_Kuehlung_circle2.Wand wand(T_start(displayUnit = "K") = 293.15, area_h = 1.72e-4, c_wall = 888, dT(displayUnit = "K") = 0, k_wall = 220, rho_wall = 2700, s = 0.04) annotation(
-      Placement(visible = true, transformation(origin = {-28, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-50, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Fluid.Pipes.DynamicPipe dynamicPipe2(replaceable package Medium = Medium, T_start = 293.15, crossArea = 0.32e-4, diameter = 0.0, isCircular = false, length = 0.043, nNodes = 3, nParallel = 1, perimeter = 0.024, roughness = 0, use_HeatTransfer = true) annotation(
       Placement(visible = true, transformation(origin = {-28, -16}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   AirEnergy_Kuehlung_circle2.Wand wand2(T_start(displayUnit = "K") = 293.15, area_h = 1.72e-4, c_wall = 888, dT(displayUnit = "K") = 0, k_wall = 220, rho_wall = 2700, s = 0.04) annotation(
-      Placement(visible = true, transformation(origin = {-28, -34}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-48, -34}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1 (replaceable package Medium = Medium) annotation(
       Placement(visible = true, transformation(origin = {-118, 22}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-118, 22}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Fluid.Interfaces.FluidPort_a port_a2 (replaceable package Medium = Medium) annotation(
@@ -232,9 +232,9 @@ model AirEnergy_Kuehlung_circle2
   Modelica.Fluid.Interfaces.FluidPort_b port_b2 (replaceable package Medium = Medium) annotation(
       Placement(visible = true, transformation(origin = {146, -18}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {146, -18}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   AirEnergy_Kuehlung_circle2.CooledPouchCell cooledPouchCell2 annotation(
-      Placement(visible = true, transformation(origin = {30, 48}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {28, 42}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   AirEnergy_Kuehlung_circle2.CooledPouchCell cooledPouchCell3 annotation(
-      Placement(visible = true, transformation(origin = {46, 4}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {28, -6}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
     connect(pipe1.port_b, port_b) annotation(
       Line(points = {{-18, -52}, {152, -52}}, color = {0, 127, 255}));
@@ -245,7 +245,7 @@ model AirEnergy_Kuehlung_circle2
   connect(dynamicPipe.port_b, fluidPort_b) annotation(
       Line(points = {{-18, 64}, {58, 64}, {58, 62}, {152, 62}}, color = {0, 127, 255}));
   connect(cooledPouchCell.Qpipe, dynamicPipe.heatPorts[1]) annotation(
-      Line(points = {{-28, 84}, {-28, 68}}, color = {191, 0, 0}));
+      Line(points = {{16, 78}, {16, 77}, {-28, 77}, {-28, 68}}, color = {191, 0, 0}));
   connect(dynamicPipe1.port_b, port_b1) annotation(
       Line(points = {{-18, 22}, {138, 22}}, color = {0, 127, 255}));
   connect(dynamicPipe2.port_b, port_b2) annotation(
@@ -255,23 +255,23 @@ model AirEnergy_Kuehlung_circle2
   connect(dynamicPipe2.port_a, port_a2) annotation(
       Line(points = {{-38, -16}, {-116, -16}, {-116, -16}, {-120, -16}}, color = {0, 127, 255}));
   connect(wand1.heatPort_a[1], dynamicPipe.heatPorts[2]) annotation(
-      Line(points = {{-28, 46}, {-28, 46}, {-28, 68}, {-28, 68}}, color = {191, 0, 0}, thickness = 0.5));
+      Line(points = {{-50, 47}, {-50, 57}, {-28, 57}, {-28, 68}}, color = {191, 0, 0}, thickness = 0.5));
   connect(wand1.heatPort_b[1], dynamicPipe1.heatPorts[1]) annotation(
-      Line(points = {{-28, 36}, {-28, 36}, {-28, 26}, {-28, 26}}, color = {191, 0, 0}, thickness = 0.5));
+      Line(points = {{-50, 37}, {-50, 31}, {-28, 31}, {-28, 26}}, color = {191, 0, 0}, thickness = 0.5));
   connect(wand.heatPort_a[1], dynamicPipe1.heatPorts[2]) annotation(
-      Line(points = {{-28, 6}, {-28, 6}, {-28, 26}, {-28, 26}}, color = {191, 0, 0}, thickness = 0.5));
+      Line(points = {{-50, 5}, {-50, 16}, {-28, 16}, {-28, 26}}, color = {191, 0, 0}, thickness = 0.5));
   connect(wand.heatPort_b[1], dynamicPipe2.heatPorts[1]) annotation(
-      Line(points = {{-28, -4}, {-28, -4}, {-28, -12}, {-28, -12}}, color = {191, 0, 0}, thickness = 0.5));
+      Line(points = {{-50, -5}, {-50, -8}, {-28, -8}, {-28, -12}}, color = {191, 0, 0}, thickness = 0.5));
   connect(wand2.heatPort_a[1], dynamicPipe2.heatPorts[2]) annotation(
-      Line(points = {{-28, -28}, {-28, -28}, {-28, -12}, {-28, -12}}, color = {191, 0, 0}, thickness = 0.5));
+      Line(points = {{-48, -29}, {-48, -20}, {-28, -20}, {-28, -12}}, color = {191, 0, 0}, thickness = 0.5));
   connect(wand2.heatPort_b[1], pipe1.heatPorts[1]) annotation(
-      Line(points = {{-28, -38}, {-28, -38}, {-28, -48}, {-28, -48}}, color = {191, 0, 0}, thickness = 0.5));
+      Line(points = {{-48, -39}, {-48, -43}, {-28, -43}, {-28, -48}}, color = {191, 0, 0}, thickness = 0.5));
   connect(cooledPouchCell1.Qpipe, pipe1.heatPorts[2]) annotation(
-      Line(points = {{-26, -78}, {-26, -78}, {-26, -48}, {-28, -48}}, color = {191, 0, 0}));
+      Line(points = {{30, -44}, {0, -44}, {0, -48}, {-28, -48}}, color = {191, 0, 0}));
   connect(cooledPouchCell2.Qpipe, dynamicPipe1.heatPorts[3]) annotation(
-      Line(points = {{28, 40}, {-26, 40}, {-26, 26}, {-28, 26}}, color = {191, 0, 0}));
+      Line(points = {{26, 34}, {-26, 34}, {-26, 26}, {-28, 26}}, color = {191, 0, 0}));
   connect(cooledPouchCell3.Qpipe, dynamicPipe2.heatPorts[3]) annotation(
-      Line(points = {{44, -4}, {11, -4}, {11, -12}, {-28, -12}}, color = {191, 0, 0}));
+      Line(points = {{26, -14}, {2, -14}, {2, -12}, {-28, -12}}, color = {191, 0, 0}));
   end PouchCellAndPipe;
 
   AirEnergy_Kuehlung_circle2.PouchCellAndPipe pouchCellAndPipe annotation(
