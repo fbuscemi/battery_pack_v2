@@ -102,4 +102,22 @@ This is a model for heat generation in 1/4 battery cell, $\dot Q = \frac{1}{4} R
 
 ## What should be improved/added
 
-- ...
+- model whole battery (9 racks)
+- when all 9 racks are modelled, compare temperatures of cells over 
+  racks. Find out if all racks are cooled similarly.
+- model pressure loss (bends) inside a rack
+- model pressure loss of inflow/outflow distribution pipes and bends.
+- first and last bar in a rack are not correctly modelled: 
+  pipe length and therefore heat transfer area are different
+- understand model, compare to other designs, verify it's correctness
+- investigate temperature distrubution inside a physical cell. If there 
+  is s significant gradient, then we should model heat conduction inside 
+  the cell.
+- parameterise model so that we can use it in an optimisation loop.
+
+  ![alt text](doc/firstlastbar.png "model not representative here")
+
+
+## Results
+
+- 
