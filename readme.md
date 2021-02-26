@@ -33,27 +33,52 @@ The model has several subcomponents, which are described below.
 
 ![alt text](doc/bar.png "a bar")
 
+![alt text](doc/sec_thru_bar.png "a section through caells and plates, showing cooling channels")
 
 ![alt text](doc/pouchcellandpipe.png "pouch cell and pipe")
 
 This element of the model represents two battery cells, and the cooling 
 element between. In other words 1/8 of a rack.
 
-The four pipe elements represent the four passes the cooling channel 
+The four pipe elements represent the four passes of the cooling channel over the battery cell.
+
+Each CooledPouchCell in the block represents 2 quarter battery cells. 
+
+The material between the pipes is modeled as well (as walls).
+
+| Parameter | Value | Unit | description |
+| --- | --- | --- | --- |
+| tba |
+
 
 
 ### CooledPouchCell
 
-![alt text](doc/.png "cooled pouch cell model")
+![alt text](doc/cooledpouchcell.png "cooled pouch cell model")
 
+This component describes the heat transfer of two attached battery cells (actually quarter battery cells) to the cooling channel.
 
+| Parameter | Value | Unit | description |
+| --- | --- | --- | --- |
+| tba |
 
 ### PouchZelle
 
+![alt text](doc/pouchzelle.png "cooled pouch cell model")
+
+This is a model for 1/4 battery cell.
+
+The left part models the electrical current and the resulting generated heat.
+The right part describes the heat capacity of the battery cell and the thermal resistance 
+of the contact between the battery cell and the adjacent cooling element (al plate).
+
+| Parameter | Value | Unit | description |
+| --- | --- | --- | --- |
+| tba |
 
 ### Wand
 
-An element hor heat conduction. Used in two places:
+An element for heat conduction. Used in two places:
 
 1. heat conduction inside Al plate, between two adjacent channels
 2. heat condiction through Al plate, from battery cell to fluid channel
