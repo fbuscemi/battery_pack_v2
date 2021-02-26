@@ -91,6 +91,7 @@ Parameters:
 
 
 
+
 ### PouchWaermemenge
 
 This is a model for heat generation in 1/4 battery cell, $\dot Q = \frac{1}{4} R_i I^2$.
